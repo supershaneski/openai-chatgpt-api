@@ -45,7 +45,7 @@
                 { "cid": "chr0003", "prompt": "You are planning to go on a journey to leave the Shire after the party. You are very anxious about your possession of the One Ring." },
                 { "cid": "chr0007", "prompt": "You suspect that the ring in possession of Bilbo is the powerful Ring of Power lost by the Dark Lord Sauron long ago." }
             ],
-            "user": "I am excited for the upcoming party and looking forward to enjoy it with my friends in the Shire."
+            "user": "I am excited for the upcoming party of my uncle Bilbo."
         },
         {
             "sid": "str0002",
@@ -106,7 +106,7 @@
             "id": "chr0003",
             "icon": 2,
             "name": "Bilbo",
-            "prompt": "In this session we will simulate a conversation with Bilbo Baggins. You will act as the hobbit Bilbo Baggins, a fictional character in the Lord of the Rings."
+            "prompt": "In this session we will simulate a conversation with Bilbo Baggins. You will act as the hobbit Bilbo Baggins, a fictional character in the Lord of the Rings. Jojo is your nephew."
         },
         {
             "sid": "str0002",

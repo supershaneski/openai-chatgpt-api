@@ -1,4 +1,3 @@
-//import MainPage from '../components/mainpage'
 import SandBox from './sandbox';
 
 export const metadata = {
