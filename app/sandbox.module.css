@@ -1,0 +1,222 @@
+.container {
+    background-color: #f5f5f5;
+    position: relative;
+    height: 100vh;
+}
+
+.header {
+    /*box-shadow: rgba(50, 50, 93, 0.125) 0px 12px 25px -5px, rgba(0, 0, 0, 0.2) 0px 5px 10px -5px;*/
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    background-color: #fff;
+    position: relative;
+    height: 175px;
+}
+
+.toolbar {
+    background-color: #000;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+}
+.toolIcon {
+    /*border: 1px solid rgba(255,255,255,0.5);*/
+    background-color: #F2A900; /*#00bd7e;*/
+    width: 24px;
+    height: 24px;
+    box-sizing: border-box;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.title {
+    position: relative;
+    font-size: 1rem;
+    margin: 0;
+    margin-left: .5rem;
+    color: #fff;
+}
+.toolTitle {
+    width: calc(100% - 90px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-left: 1rem;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+
+.scenario {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+}
+.scenarioTitle {
+    width: calc(100% - 90px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-left: 1rem;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+.scenarioTitle .text {
+    font-size: 1rem;
+}
+.scenarioControl {
+    width: 90px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.systems {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 75px;
+}
+.systemItems {
+    position: relative;
+    width: calc(100% - 90px);
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-left: 1rem;
+    box-sizing: border-box;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.systemItems::-webkit-scrollbar {
+    display: none;
+}
+
+.avatars {
+    position: relative;
+    display: flex;
+    height: 75px;
+}
+.systemControl {
+    width: 90px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.main {
+    position: relative;
+    height: calc(100vh - 255px);
+}
+.mainMessages {
+    position: relative;
+    height: 100%;
+    overflow-y: auto;
+    box-sizing: border-box;
+    z-index: 1;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.mainMessages::-webkit-scrollbar {
+    display: none;
+}
+
+.mainTop {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    z-index: 2;
+}
+.mainBottom {
+    position: absolute;
+    right: 1rem;
+    top: -5rem;
+    z-index: 3;
+}
+
+.input {
+    /*box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;*/
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    background-color: #fff9;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 1000;
+}
+.inputDiv {
+    position: relative;
+    margin: 1rem;
+}
+
+/*
+.avatarItem {
+    position: relative;
+    width: 65px;
+    margin-right: 2px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.avatarItem:last-child {
+    margin-right: 0;
+}
+.avatarItemText {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+}
+.avatarText {
+    font-size: .6rem;
+}
+*/
+
+.messageItem {
+    position: relative;
+    margin: 1rem;
+}
+.messageItem:first-child {
+    margin-top: 4rem;
+}
+.messageItem:last-child {
+    margin-bottom: 5rem; /*6rem*/
+}
+
+.sendingDiv {
+    background-color: #F2A900;
+    position: relative;
+}
+.sendingText {
+    color: green;
+}
+
+@media (prefers-color-scheme: dark) {
+
+    .container {
+        background-color: #333;
+        color: #fff;
+    }
+
+    .header {
+        background-color: #555;
+    }
+    
+    /*
+    .toolbar {
+        background-color: #000;
+    }
+    */
+
+    .input {
+        background-color: #555;
+    }
+
+}

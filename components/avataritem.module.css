@@ -1,0 +1,25 @@
+.avatarItem {
+    position: relative;
+    width: 65px;
+    height: 75px;
+    margin-right: 2px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.avatarItem:last-child {
+    margin-right: 0;
+}
+
+.avatarItemText {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+}
+
+.avatarText {
+    font-size: .6rem;
+}
