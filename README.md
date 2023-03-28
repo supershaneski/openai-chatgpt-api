@@ -17,7 +17,7 @@ This is like an advanced `imaginative play` when we were kids where we use our i
 
 # App
 
-I included to two sample stories with scenes and characters that you can use for testing. You can be either `Dorothy` in `Wizard of Oz` or `Frodo` in `Lord of the Rings`.
+I included to two sample stories with scenes and characters that you can use for testing.
 
 <picture>
  <source media="(prefers-color-scheme: dark)" srcset="./docs/screenshot2.jpeg">
