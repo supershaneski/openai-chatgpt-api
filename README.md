@@ -25,7 +25,16 @@ I included to two sample stories with scenes and characters that you can use for
  <img alt="Screenshot" src="./docs/screenshot1.jpeg">
 </picture>
 
-The user interface is very simple and intuitive so you can probably use it without any instructions.
+The user interface is very simple and intuitive so it is easy to use.
+
+Select the Story you want or Add New Story:
+![Select Story](./docs/screenshot5.png "Select Story")
+
+Select the Scene:
+![Select Scene](./docs/screenshot3.png "Select Scene")
+
+To edit the User Prompt (click the person icon at the left of Text input): 
+![User Prompt](./docs/screenshot4.png "User Prompt")
 
 All data are stored in localStorage using [Zustand](https://github.com/pmndrs/zustand) for easy retrieval. 
 

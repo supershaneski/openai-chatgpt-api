@@ -760,30 +760,14 @@ export default function SandBox() {
             <div className={classes.input}>
                 <div className={classes.mainBottom}>
                     <CustomTheme>
-                        {
-                            getDeleteFlagEnabled &&
-                            <Fab 
-                            color="tertiary" 
-                            disabled={getDeleteFlagEnabled}
-                            onClick={deleteMessages}
-                            sx={{opacity: .8}}
-                            >
-                                <RefreshIcon />
-                            </Fab>
-                        }
-                        {
-                            !getDeleteFlagEnabled &&
-                            <Tooltip title="Delete Messages">
-                            <Fab 
-                            color="tertiary" 
-                            disabled={getDeleteFlagEnabled}
-                            onClick={deleteMessages}
-                            sx={{opacity: .8}}
-                            >
-                                <RefreshIcon />
-                            </Fab>
-                            </Tooltip>
-                        }
+                        <Fab 
+                        color="tertiary" 
+                        disabled={getDeleteFlagEnabled}
+                        onClick={deleteMessages}
+                        sx={{opacity: .8}}
+                        >
+                            <RefreshIcon />
+                        </Fab>
                     </CustomTheme>
                 </div>
                 <div className={classes.inputDiv}>
