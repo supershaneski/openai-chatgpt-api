@@ -11,6 +11,7 @@ import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import Typography from '@mui/material/Typography'
 import Fab from '@mui/material/Fab'
+import Tooltip from '@mui/material/Tooltip'
 
 import StoriesIcon from '@mui/icons-material/AutoStories';
 import SettingsIcon from '@mui/icons-material/Settings'
@@ -31,13 +32,17 @@ import BookDialog from '../components/bookdialog'
 import SceneDialog, { DialogModes as SceneDialogModes } from '../components/scenedialog'
 import CharacterDialog, { DialogModes as CharacterDialogModes } from '../components/characterdialog'
 import UserDialog from '../components/userdialog'
+import DeleteDialog, { DeleteModes } from '../components/deletedialog'
 
 import AvatarItem from '../components/avataritem'
 import LoadingText from '../components/loadingtext'
 
 import CustomTheme from '../components/customtheme'
 
+import { getDataId } from '../lib/utils'
+
 import useAppStore from '../stores/appStore'
+import useDataStore from '../stores/dataStore'
 import useBookStore from '../stores/bookStore'
 
 const sendRequest = async (payload) => {
@@ -70,6 +75,13 @@ export default function SandBox() {
     const timerRef = React.useRef()
 
     const setDarkMode = useAppStore((state) => state.setDarkMode)
+    const chatMode = useAppStore((state) => state.chatMode)
+    const setChatMode = useAppStore((state) => state.setChatMode)
+
+    const getData = useDataStore((state) => state.getDataBySceneId)
+    const updateData = useDataStore((state) => state.updateDataBySceneId)
+    const deleteData = useDataStore((state) => state.deleteDataById)
+    const addData = useDataStore((state) => state.addData)
 
     const bookId = useBookStore((state) => state.bookId)
     const chapterId = useBookStore((state) => state.chapterId)
@@ -103,8 +115,10 @@ export default function SandBox() {
     const [openSceneDialog, setSceneDialog] = React.useState(false)
     const [openUserDialog, setUserDialog] = React.useState(false)
     const [openCharacterDialog, setCharacterDialog] = React.useState(false)
+    const [openDeleteDialog, setDeleteDialog] = React.useState(false)
+    const [deleteMode, setDeleteMode] = React.useState(DeleteModes.Character)
 
-    const [chatMode, setChatMode] = React.useState(ChatModes.Person)
+    //const [chatMode, setChatMode] = React.useState(ChatModes.Person)
     const [sceneMode, setSceneMode] = React.useState(SceneDialogModes.Save)
     const [characterMode, setCharacterMode] = React.useState(CharacterDialogModes.Save)
 
@@ -163,6 +177,8 @@ export default function SandBox() {
 
     const refreshApp = React.useCallback(() => {
 
+        console.log("[refresh app]")
+
         const book = getBook(bookId)
         const chapter = getChapter(chapterId)
 
@@ -173,6 +189,10 @@ export default function SandBox() {
         setChapterItems(getChapters(bookId))
 
         setCharacterItems(getCharacters(bookId))
+
+        const raw_data = getData(chapterId)
+        const prev_data = raw_data.map((item) => item.data)
+        setDataMessages(prev_data)
 
     }, [bookId, chapterId])
 
@@ -236,12 +256,15 @@ export default function SandBox() {
         setInputText('')
         inputRef.current.blur()
 
-        const user_data_message = { type: 'user', content: inputText, character: characterId, }
+        const post_id = getDataId()
+
+        const user_data_message = { pid: post_id, type: 'user', content: inputText, character: characterId, }
         setDataMessages((prev) => {
             let items = prev.slice(0)
             items.push(user_data_message)
             return items
         })
+        addData({ id: post_id, sid: chapterId, data: user_data_message })
 
         scrollToTop()
 
@@ -253,11 +276,16 @@ export default function SandBox() {
             previous: previous_prompts, 
         }).then((resp) => {
 
+            const new_post_id = getDataId()
+            const new_system_data = { pid: new_post_id, type: 'assistant', content: resp.reply.content, icon: character.icon, id: characterId, name: character.name}
+
             setDataMessages((prev) => {
                 let items = prev.slice(0)
-                items.push({ type: 'assistant', content: resp.reply.content, icon: character.icon, id: characterId, name: character.name})
+                //items.push({ type: 'assistant', content: resp.reply.content, icon: character.icon, id: characterId, name: character.name})
+                items.push(new_system_data)
                 return items
             })
+            addData({ id: new_post_id, sid: chapterId, data: new_system_data })
 
             setSendFlag(false)
 
@@ -267,11 +295,16 @@ export default function SandBox() {
 
             console.log(error)
 
+            const new_post_id = getDataId()
+            const new_system_error_data = { pid: new_post_id, type: 'assistant', content: error, icon: character.icon, id: characterId, name: character.name}
+
             setDataMessages((prev) => {
                 let items = prev.slice(0)
-                items.push({ type: 'assistant', content: error, icon: character.icon, id: characterId, name: character.name})
+                //items.push({ type: 'assistant', content: error, icon: character.icon, id: characterId, name: character.name})
+                items.push(new_system_error_data)
                 return items
             })
+            addData({ id: new_post_id, sid: chapterId, data: new_system_error_data })
 
             setSendFlag(false)
 
@@ -279,10 +312,6 @@ export default function SandBox() {
 
         })
         
-    }
-
-    const resendSubmit = () => {
-        //
     }
 
     const scrollToTop = () => {
@@ -314,6 +343,10 @@ export default function SandBox() {
 
         setAnchorEl(null)
 
+        const raw_data = getData(id)
+        const prev_data = raw_data.map((item) => item.data)
+        setDataMessages(prev_data)
+
     }
 
     const handleSelectCharacter = (id) => {
@@ -333,8 +366,7 @@ export default function SandBox() {
             const book = getBook(book_id)
 
             selectBook(book_id)
-
-            setDataMessages([])
+            //setDataMessages([])
             setBookName(book.name)
 
         }
@@ -382,6 +414,8 @@ export default function SandBox() {
             setChapterName(chapter.name)
             setChapterDescription(chapter.prompt)
 
+            setDataMessages([])
+
         }, 500)
     }
 
@@ -416,6 +450,10 @@ export default function SandBox() {
         setChapterDescription(chaps[0].prompt)
 
         setSceneDialog(false)
+
+        const raw_data = getData(chaps[0].id)
+        const prev_data = raw_data.map((item) => item.data)
+        setDataMessages(prev_data)
 
     }
     
@@ -476,13 +514,117 @@ export default function SandBox() {
         return chapterDescription.length > 0 ? <span className={classes.text}><strong>{ chapterName }</strong> - { chapterDescription }</span> : <span className={classes.text}><strong>{ chapterName }</strong></span>
     }, [chapterName, chapterDescription])
 
-    const handleDeleteMessage = (index) => {
+    const handleDeleteMessage = (pid) => {
+        
+        deleteData(pid)
         setDataMessages((prev) => {
-            let items = prev.slice(0).filter((_,i) => i !== index)
+            let items = prev.slice(0).filter((item) => item.pid !== pid)
             return items
         })
+
+    }
+    
+    const deleteMessages = () => {
+
+        setDeleteMode(chatMode === ChatModes.Person ? DeleteModes.Character : DeleteModes.Scene)
+        setDeleteDialog(true)
+
+        /*let data = dataMessages.slice(0)
+
+        if(chatMode === ChatModes.Person) {
+
+            data = data.filter((item) => {
+                if(item.type === 'assistant') {
+                    return item.id !== characterId
+                } else {
+                    return item.character !== characterId
+                }
+            })
+
+            let saved_data = []
+
+            if(data.length > 0) {
+                saved_data = data.map((item) => {
+                    return {
+                        id: item.pid,
+                        sid: chapterId,
+                        data: item,
+                    }
+                })
+            }
+
+            updateData(chapterId, saved_data)
+            setDataMessages(data)
+
+        } else {
+
+            updateData(chapterId, [])
+            setDataMessages([])
+
+        }*/
+
     }
 
+    const handleChangeMode = (mode) => {
+        setChatMode(mode)
+        scrollToTop()
+    }
+
+    const handleDeleteDialog = () => {
+        
+        let data = dataMessages.slice(0)
+
+        if(chatMode === ChatModes.Person && deleteMode === DeleteModes.Character) {
+
+            data = data.filter((item) => {
+                if(item.type === 'assistant') {
+                    return item.id !== characterId
+                } else {
+                    return item.character !== characterId
+                }
+            })
+
+            let saved_data = []
+
+            if(data.length > 0) {
+                saved_data = data.map((item) => {
+                    return {
+                        id: item.pid,
+                        sid: chapterId,
+                        data: item,
+                    }
+                })
+            }
+
+            updateData(chapterId, saved_data)
+            setDataMessages(data)
+
+        } else {
+
+            updateData(chapterId, [])
+            setDataMessages([])
+
+        }
+
+        setDeleteDialog(false)
+
+    }
+
+    const handleCloseDeleteDialog = () => {
+        setDeleteDialog(false)
+    }
+
+    const getDeleteFlagEnabled = dataMessages.filter((item) => {
+            if(chatMode === ChatModes.Person) {
+                if(item.type === 'assistant') {
+                    return item.id === characterId
+                } else {
+                    return item.character === characterId
+                }
+            } else {
+                return true
+            }
+        }).length > 0
 
     return (
         <div className={classes.container}>
@@ -602,7 +744,7 @@ export default function SandBox() {
                                 role={item.type} 
                                 content={item.content} 
                                 name={item?.name}
-                                onDelete={() => handleDeleteMessage(index)}
+                                onDelete={() => handleDeleteMessage(item.pid)}
                                 />
                             </div>
                         )
@@ -614,19 +756,22 @@ export default function SandBox() {
                 }
                 </div>
                 <div className={classes.mainTop}>
-                    <ToggleButton mode={chatMode} onChange={(mode) => setChatMode(mode)} />
+                    <ToggleButton mode={chatMode} onChange={handleChangeMode} />
                 </div>
             </div>
             <div className={classes.input}>
-                <div className={classes.mainBottom} style={{display: 'none'}}>
+                <div className={classes.mainBottom}>
                     <CustomTheme>
+                        <Tooltip title="Delete Messages">
                         <Fab 
                         color="tertiary" 
-                        disabled={dataMessages.length === 0 || (dataMessages[dataMessages.length - 1].type === 'assistant' && dataMessages[dataMessages.length - 1].id === characterId)}
-                        onClick={resendSubmit}
+                        disabled={!getDeleteFlagEnabled}
+                        onClick={deleteMessages}
+                        sx={{opacity: .8}}
                         >
                             <RefreshIcon />
                         </Fab>
+                        </Tooltip>
                     </CustomTheme>
                 </div>
                 <div className={classes.inputDiv}>
@@ -673,6 +818,16 @@ export default function SandBox() {
                     </CustomTheme>
                 </div>
             </div>
+            {
+                openDeleteDialog && createPortal(
+                    <DeleteDialog 
+                    mode={deleteMode}
+                    onClose={handleCloseDeleteDialog} 
+                    onDelete={handleDeleteDialog} 
+                    />,
+                    document.body,
+                )
+            }
             {
                 openBookDialog && createPortal(
                     <BookDialog onClose={handleCloseBookDialog} onConfirm={handleConfirmBook} />,

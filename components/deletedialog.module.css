@@ -1,0 +1,51 @@
+.container {
+    background-color: #0009;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.dialog {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    position: relative;
+    background-color: #f5f5f5;
+    /*width: 90%;*/
+    border-radius: 5px;
+    padding: 1rem;
+    box-sizing: border-box;
+    margin-top: 1rem;
+}
+
+.contents {
+    position: relative;
+}
+
+.text {
+    margin: 0;
+    text-align: center;
+    padding: 1rem 1rem;
+}
+
+.action {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+@media (prefers-color-scheme: dark) {
+
+    .dialog {
+        background-color: #555;
+    }
+
+    .text {
+        color: #fff;
+    }
+
+}

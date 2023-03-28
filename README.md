@@ -3,13 +3,9 @@ openai-chatgpt-api
 
 This is sample interactive storytelling narrative chatbot application using [ChatGPT API](https://platform.openai.com/docs/guides/chat), powered by `gpt-3.5-turbo`, OpenAI’s advanced language model, built using [Next 13](https://nextjs.org/), the React framework.
 
-If you have had the opportunity to use either [ChatGPT](https://chat.openai.com/) or `Bing Chat`, you would have likely realized the vast potential for implementation, spanning from productivity tools to storytelling. These chat platforms can enhance work efficiency while also providing hours of entertainment. With this in mind, I have created a UI that prioritizes the art of storytelling. 
-
 ---
 
 これは、ChatGPT APIを使用したサンプルのインタラクティブなストーリーテリング・ナラティブ・チャットボットWebアプリケーションです。このアプリケーションは、OpenAIが高度な言語モデル、gpt-3.5-turboを使用しています。また、ReactフレームワークのNext.js 13を使用して構築されています。
-
-もしChatGPTまたはBing Chatを使用したことがあるなら、生産性ツールからストーリーテリングまで、さまざまな可能性があることに気づいたはずです。これらのチャットプラットフォームは、作業効率を向上させるだけでなく、数時間のエンターテインメントを提供することができます。そこで、私はストーリーテリングの芸術に重点を置いたUIを作成しました。
 
 
 # Motivation
@@ -18,13 +14,22 @@ This app aims to provide a simple and convenient user interface to facilitate in
 
 This is like an advanced `imaginative play` when we were kids where we use our imagination to create scenarios with toys or other objects, talking to them as if they are alive.
 
-I have not played `Dungeons & Dragons` but you can probably also use this app to play it with your own backstory and scenarios.
+I have not played `Dungeons & Dragons` but you can probably use this app to play it with your own backstory and scenarios.
 
 
-# Sample
+# App
 
-There two sample stories with scenes and characters included for testing, `The Wonderful Wizard of Oz` and `LOTR`.
+There are two sample stories with scenes and characters included that you can use for testing. You can be either `Dorothy` in `Wizard of Oz` of `Frodo` in `Lord of the Rings`.
 
+<picture>
+ <source media="(prefers-color-scheme: dark)" srcset="./docs/screenshot2.jpeg">
+ <source media="(prefers-color-scheme: light)" srcset="./docs/screenshot1.jpeg">
+ <img alt="Screenshot" src="./docs/screenshot1.jpeg">
+</picture>
+
+The user interface is very simple and intuitive so you can probably use it without any instructions.
+
+All data are stored in localStorage using [zustand](https://github.com/pmndrs/zustand) for easy retrieval. Please be advised that this app is not for production as sending data to the backend is not optimized. I am always sending the system prompt, message and old conversations every time. Running in your computer or local network, this is not a problem.
 
 
 # Prompt Design
@@ -89,14 +94,18 @@ In any story, there is the so called `character development` which tracks the ch
 
 `User prompt` lays out the identity of the user (you) for the AI to respond with. You can omit this if you just want to interact with the AI's character. Like in `scene character prompt`, the `scene user prompt` gives context to the AI about the user (you) at that particulat scene.
 
-To have the best interaction and generate good response from the AI, it is better to use the `zero shot` approach when writing the prompts. You do not want to spill all the beans to the AI and give all contexts in one go. We just want to sway them in certain direction with as few nudgings as possible without revealing all the details of the story or scenes. We want the AI not to generate canned response but to be more creative in its response.
-
-> (Translation: You are Lady Fujitsubo, a character from "The Tale of Genji," who has been reincarnated and is now living in modern-day Japan. You have adjusted well to modern society and are having a conversation with a friend. Please conduct the conversation entirely in Japanese.)
+To have the best interaction and generate good response from the AI, it is better to use the `zero shot` approach when writing the prompts. You do not want to spill all the beans to the AI and give all contexts in one go. We just want to sway them in certain direction with as few nudgings as possible without revealing all the details of the story or scenes. We want the AI not to generate canned response but to be more creative.
 
 
 # Token Management
 
 For `gpt-3.5-turbo-0301`, the maximum limit is 4096 tokens.
+
+But I set the default cutoff to 3072 tokens (i.e. 1024 x 3).
+I just do a simple removal of certain portions of the previous conversations.
+I remove about 1/3 of the oldest posts.
+
+At this moment, there is no prompt or token optimizations yet.
 
 
 # Installation

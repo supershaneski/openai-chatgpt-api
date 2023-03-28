@@ -6,8 +6,10 @@ const useSystemStore = create(
         (set, get) => ({
             
             darkMode: false,
+            chatMode: 'person',
             
             setDarkMode: (flag) => set({ darkMode: flag }),
+            setChatMode: (mode) => set({ chatMode: mode })
             
         }),
         {
