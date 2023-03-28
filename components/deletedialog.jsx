@@ -2,8 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import Button from '@mui/material/Button'
-import FormControl from '@mui/material/FormControl'
-import InputLabel from '@mui/material/InputLabel'
 
 import CustomTheme from './customtheme'
 
