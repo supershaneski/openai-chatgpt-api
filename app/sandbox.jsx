@@ -177,8 +177,6 @@ export default function SandBox() {
 
     const refreshApp = React.useCallback(() => {
 
-        console.log("[refresh app]")
-
         const book = getBook(bookId)
         const chapter = getChapter(chapterId)
 
@@ -624,7 +622,7 @@ export default function SandBox() {
             } else {
                 return true
             }
-        }).length > 0
+        }).length === 0
 
     return (
         <div className={classes.container}>
@@ -762,16 +760,30 @@ export default function SandBox() {
             <div className={classes.input}>
                 <div className={classes.mainBottom}>
                     <CustomTheme>
-                        <Tooltip title="Delete Messages">
-                        <Fab 
-                        color="tertiary" 
-                        disabled={!getDeleteFlagEnabled}
-                        onClick={deleteMessages}
-                        sx={{opacity: .8}}
-                        >
-                            <RefreshIcon />
-                        </Fab>
-                        </Tooltip>
+                        {
+                            getDeleteFlagEnabled &&
+                            <Fab 
+                            color="tertiary" 
+                            disabled={getDeleteFlagEnabled}
+                            onClick={deleteMessages}
+                            sx={{opacity: .8}}
+                            >
+                                <RefreshIcon />
+                            </Fab>
+                        }
+                        {
+                            !getDeleteFlagEnabled &&
+                            <Tooltip title="Delete Messages">
+                            <Fab 
+                            color="tertiary" 
+                            disabled={getDeleteFlagEnabled}
+                            onClick={deleteMessages}
+                            sx={{opacity: .8}}
+                            >
+                                <RefreshIcon />
+                            </Fab>
+                            </Tooltip>
+                        }
                     </CustomTheme>
                 </div>
                 <div className={classes.inputDiv}>

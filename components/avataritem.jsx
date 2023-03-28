@@ -15,11 +15,8 @@ const AvatarItem = ({
     selected = '', 
     onClick = undefined 
 }) => {
-    return (
-        <div className={classes.avatarItem} onClick={() => onClick(id)}>
-            {
-                selected &&
-                <Badge 
+    /*
+    <Badge 
                 overlap="circular"
                 anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                 color="error" 
@@ -35,6 +32,21 @@ const AvatarItem = ({
                     }
                     </Avatar>
                 </Badge>
+    */
+    return (
+        <div className={classes.avatarItem} onClick={() => onClick(id)}>
+            {
+                selected &&
+                <Avatar sx={{bgcolor: '#00bd7e'}}>
+                {
+                    icon === 0 &&
+                    <CharacterIcon icon={icon} color="#fff" />
+                }
+                {
+                    icon > 0 &&
+                    <CharacterIcon icon={icon} />
+                }
+                </Avatar>
             }
             {
                 !selected &&
