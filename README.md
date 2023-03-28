@@ -27,7 +27,7 @@ I included to two sample stories with scenes and characters that you can use for
 
 The user interface is very simple and intuitive so it is easy to use.
 
-Select the Story you want or Add New Story:
+Select the Story you want, Edit or Add New Story:
 ![Select Story](./docs/screenshot5.png "Select Story")
 
 Select the Scene:
