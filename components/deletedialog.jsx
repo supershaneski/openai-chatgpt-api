@@ -52,7 +52,7 @@ DeleteDialog.propTypes = {
     /**
      * Delete mode
      */
-    mode: PropTypes.oneOf('character', 'scene'),
+    mode: PropTypes.oneOf(['character', 'scene']),
     /**
      * Delete event handler
      */

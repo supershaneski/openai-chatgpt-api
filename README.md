@@ -10,16 +10,14 @@ This is sample interactive storytelling narrative chatbot application using [Cha
 
 # Motivation
 
-This app aims to provide a simple and convenient user interface to facilitate interactive storytelling narration with a chatbot. 
+This app aims to provide a simple and convenient user interface to facilitate interactive conversation with a chatbot based on some storyline/scenarios.
 
 This is like an advanced `imaginative play` when we were kids where we use our imagination to create scenarios with toys or other objects, talking to them as if they are alive.
-
-I have not played `Dungeons & Dragons` but you can probably use this app to play it with your own backstory and scenarios.
 
 
 # App
 
-There are two sample stories with scenes and characters included that you can use for testing. You can be either `Dorothy` in `Wizard of Oz` of `Frodo` in `Lord of the Rings`.
+I included to two sample stories with scenes and characters that you can use for testing. You can be either `Dorothy` in `Wizard of Oz` or `Frodo` in `Lord of the Rings`.
 
 <picture>
  <source media="(prefers-color-scheme: dark)" srcset="./docs/screenshot2.jpeg">
@@ -29,7 +27,10 @@ There are two sample stories with scenes and characters included that you can us
 
 The user interface is very simple and intuitive so you can probably use it without any instructions.
 
-All data are stored in localStorage using [zustand](https://github.com/pmndrs/zustand) for easy retrieval. Please be advised that this app is not for production as sending data to the backend is not optimized. I am always sending the system prompt, message and old conversations every time. Running in your computer or local network, this is not a problem.
+All data are stored in localStorage using [Zustand](https://github.com/pmndrs/zustand) for easy retrieval. 
+
+Please be advised that this app is not optimized to be deployed for production.
+The way the data is sent to the route handler prior to sending request to the API is not efficient.
 
 
 # Prompt Design
@@ -102,8 +103,7 @@ To have the best interaction and generate good response from the AI, it is bette
 For `gpt-3.5-turbo-0301`, the maximum limit is 4096 tokens.
 
 But I set the default cutoff to 3072 tokens (i.e. 1024 x 3).
-I just do a simple removal of certain portions of the previous conversations.
-I remove about 1/3 of the oldest posts.
+I just do a simple deletion of 1/3 of the oldest entries as a way to prevent hitting the max limit.
 
 At this moment, there is no prompt or token optimizations yet.
 
