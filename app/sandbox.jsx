@@ -279,7 +279,6 @@ export default function SandBox() {
 
             setDataMessages((prev) => {
                 let items = prev.slice(0)
-                //items.push({ type: 'assistant', content: resp.reply.content, icon: character.icon, id: characterId, name: character.name})
                 items.push(new_system_data)
                 return items
             })
@@ -298,7 +297,6 @@ export default function SandBox() {
 
             setDataMessages((prev) => {
                 let items = prev.slice(0)
-                //items.push({ type: 'assistant', content: error, icon: character.icon, id: characterId, name: character.name})
                 items.push(new_system_error_data)
                 return items
             })
@@ -526,41 +524,7 @@ export default function SandBox() {
 
         setDeleteMode(chatMode === ChatModes.Person ? DeleteModes.Character : DeleteModes.Scene)
         setDeleteDialog(true)
-
-        /*let data = dataMessages.slice(0)
-
-        if(chatMode === ChatModes.Person) {
-
-            data = data.filter((item) => {
-                if(item.type === 'assistant') {
-                    return item.id !== characterId
-                } else {
-                    return item.character !== characterId
-                }
-            })
-
-            let saved_data = []
-
-            if(data.length > 0) {
-                saved_data = data.map((item) => {
-                    return {
-                        id: item.pid,
-                        sid: chapterId,
-                        data: item,
-                    }
-                })
-            }
-
-            updateData(chapterId, saved_data)
-            setDataMessages(data)
-
-        } else {
-
-            updateData(chapterId, [])
-            setDataMessages([])
-
-        }*/
-
+        
     }
 
     const handleChangeMode = (mode) => {

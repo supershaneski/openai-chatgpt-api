@@ -77,7 +77,7 @@ export async function POST(req) {
     if(errorFlag) {
 
         return new Response(JSON.stringify({ reply:
-            {role: 'assistant', content: "Error something" }
+            {role: 'assistant', content: "Oops, an error occured." }
         }), {
             status: 200,
         })
