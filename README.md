@@ -1,23 +1,25 @@
 openai-chatgpt-api
 =====
 
-This is sample interactive storytelling narrative chatbot application using [ChatGPT API](https://platform.openai.com/docs/guides/chat), powered by `gpt-3.5-turbo`, OpenAI’s advanced language model, built using [Next 13](https://nextjs.org/), the React framework.
+A sample interactive chatbot application that can be used for roleplay based on some storyline, using ChatGPT API, powered by gpt-3.5-turbo, OpenAI's advanced language model, built using Next 13, the React framework.
 
 ---
 
-これは、ChatGPT APIを使用したサンプルのインタラクティブなストーリーテリング・ナラティブ・チャットボットWebアプリケーションです。このアプリケーションは、OpenAIが高度な言語モデル、gpt-3.5-turboを使用しています。また、ReactフレームワークのNext.js 13を使用して構築されています。
+ChatGPT API を使用して、ロールプレイに使用できるインタラクティブなチャットボットサンプルアプリです。
 
 
 # Motivation
 
-This app aims to provide a simple and convenient user interface to facilitate interactive conversation with a chatbot based on some storyline/scenarios.
+This app aims to provide a simple and convenient user interface to facilitate interactive roleplay conversation with a chatbot based on some storyline/scenarios.
 
-This is like an advanced `imaginative play` when we were kids where we use our imagination to create scenarios with toys or other objects, talking to them as if they are alive.
+---
+
+このアプリは、ストーリー/シナリオに基づいたチャットボットとの対話型ロールプレイ会話を容易にするシンプルで便利なユーザーインターフェースを提供することを目的としています。
 
 
 # App
 
-I included to two sample stories with scenes and characters that you can use for testing.
+I included two sample stories with scenes and characters that you can use for testing.
 
 <picture>
  <source media="(prefers-color-scheme: dark)" srcset="./docs/screenshot2.jpeg">
