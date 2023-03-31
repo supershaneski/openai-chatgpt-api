@@ -20,14 +20,13 @@ This app aims to provide a simple and convenient user interface to facilitate in
 # App
 
 I included two sample stories with scenes and characters that you can use for testing.
+The user interface is very simple and intuitive so it is easy to use.
 
 <picture>
  <source media="(prefers-color-scheme: dark)" srcset="./docs/screenshot2.jpeg">
  <source media="(prefers-color-scheme: light)" srcset="./docs/screenshot1.jpeg">
  <img alt="Screenshot" src="./docs/screenshot1.jpeg">
 </picture>
-
-The user interface is very simple and intuitive so it is easy to use.
 
 Select the Story you want or Add New Story:
 
@@ -45,7 +44,7 @@ Edit or write your own Story prompt:
   <img alt="Screenshot" src="./docs/story11.jpeg">
 </picture>
 
-Select or Edit the Scene prompt:
+Edit or write your own Scene prompt:
 
 <picture>
   <source media="(prefers-color-scheme: light)" srcset="./docs/scene1.jpeg">
@@ -53,7 +52,7 @@ Select or Edit the Scene prompt:
   <img alt="Screenshot" src="./docs/scene1.jpeg">
 </picture>
 
-Select or Edit the Character prompt:
+Edit or write your own Character prompt:
 
 <picture>
   <source media="(prefers-color-scheme: light)" srcset="./docs/character1.jpeg">
