@@ -29,17 +29,37 @@ I included two sample stories with scenes and characters that you can use for te
 
 The user interface is very simple and intuitive so it is easy to use.
 
-Select the Story you want, Edit or Add New Story:
+Select the Story you want or Add New Story:
 
-![Select Story](./docs/screenshot5.png "Select Story")
+<picture>
+  <source media="(prefers-color-scheme: light)" srcset="./docs/story1.jpeg">
+  <source media="(prefers-color-scheme: dark)" srcset="./docs/story2.png">
+  <img alt="Screenshot" src="./docs/story1.jpeg">
+</picture>
 
-Select the Scene:
+Edit or write your own Story prompt:
 
-![Select Scene](./docs/screenshot3.png "Select Scene")
+<picture>
+  <source media="(prefers-color-scheme: light)" srcset="./docs/story11.jpeg">
+  <source media="(prefers-color-scheme: dark)" srcset="./docs/story21.jpeg">
+  <img alt="Screenshot" src="./docs/story11.jpeg">
+</picture>
 
-To edit the User Prompt (click the person icon at the left of Text input): 
+Select or Edit the Scene prompt:
 
-![User Prompt](./docs/screenshot4.png "User Prompt")
+<picture>
+  <source media="(prefers-color-scheme: light)" srcset="./docs/scene1.jpeg">
+  <source media="(prefers-color-scheme: dark)" srcset="./docs/scene2.jpeg">
+  <img alt="Screenshot" src="./docs/scene1.jpeg">
+</picture>
+
+Edit or write your own User prompt (click the person icon at the left of Text input):
+
+<picture>
+  <source media="(prefers-color-scheme: light)" srcset="./docs/user1.jpeg">
+  <source media="(prefers-color-scheme: dark)" srcset="./docs/user2.jpeg">
+  <img alt="Screenshot" src="./docs/user1.jpeg">
+</picture>
 
 All data are stored in localStorage using [Zustand](https://github.com/pmndrs/zustand) for easy retrieval. 
 
