@@ -53,6 +53,14 @@ Select or Edit the Scene prompt:
   <img alt="Screenshot" src="./docs/scene1.jpeg">
 </picture>
 
+Select or Edit the Character prompt:
+
+<picture>
+  <source media="(prefers-color-scheme: light)" srcset="./docs/character1.jpeg">
+  <source media="(prefers-color-scheme: dark)" srcset="./docs/character2.jpeg">
+  <img alt="Screenshot" src="./docs/character1.jpeg">
+</picture>
+
 Edit or write your own User prompt (click the person icon at the left of Text input):
 
 <picture>
