@@ -699,10 +699,20 @@ export default function SandBox() {
                             return true
                         }
                     }).map((item, index) => {
+                        
+                        let icon = item?.icon || 0
+
+                        if(item.type === 'assistant') {
+                            let char = characterItems.find((citem) => item.id === item.id)
+                            if(char) {
+                                icon = char.icon
+                            }
+                        }
+
                         return (
                             <div key={index} className={classes.messageItem}>
                                 <ContentItem 
-                                icon={item?.icon || 0} 
+                                icon={icon} 
                                 role={item.type} 
                                 content={item.content} 
                                 name={item?.name}
