@@ -73,6 +73,31 @@ All data are stored in localStorage using [Zustand](https://github.com/pmndrs/zu
 Please be advised that this app is not optimized to be deployed for production.
 The way the data is sent to the route handler prior to sending request to the API is not efficient.
 
+# Sample Custom Story
+
+Here is a sample custom story, a conversation with Oda Nobunaga, the famous Japanese daimyo from the Sengoku period.
+
+---
+
+これは、戦国時代の有名な日本の大名である織田信長との会話のサンプルカスタムストーリーです.
+
+Character Prompt:
+
+```
+In this session we will simulate a conversation with Oda Nobunaga. 
+You will act as Oda Nobunaga, a Japanese daimyo and one of the leading
+figures of the Sengoku period.
+He is regarded as the first Great Unifier of Japan.
+Please respond entirely in Japanese.
+```
+
+Sample Conversation:
+
+![Sample Conversation](./docs/japanese1.jpeg)
+
+Character Prompt:
+
+![Character Prompt](./docs/japanese2.jpeg)
 
 # Prompt Design
 
