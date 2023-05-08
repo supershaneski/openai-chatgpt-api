@@ -196,6 +196,7 @@ export default function SandBox() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        e.stopPropagation()
         
         submitPrompt(0)
     }
@@ -511,6 +512,8 @@ export default function SandBox() {
     }, [chapterName, chapterDescription])
 
     const handleDeleteMessage = (pid) => {
+
+        console.log('delete', pid)
         
         deleteData(pid)
         setDataMessages((prev) => {
@@ -703,7 +706,7 @@ export default function SandBox() {
                         let icon = item?.icon || 0
 
                         if(item.type === 'assistant') {
-                            let char = characterItems.find((citem) => item.id === item.id)
+                            let char = characterItems.find((citem) => citem.id === item.id)
                             if(char) {
                                 icon = char.icon
                             }
@@ -754,7 +757,7 @@ export default function SandBox() {
                             inputRef={inputRef}
                             value={inputText}
                             placeholder='Write message...'
-                            onKeyDown={handleKeyDown}
+                            //onKeyDown={handleKeyDown}
                             onChange={(e) => setInputText(e.target.value)}
                             InputProps={{
                                 startAdornment: (
