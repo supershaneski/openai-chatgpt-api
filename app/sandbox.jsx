@@ -512,8 +512,6 @@ export default function SandBox() {
     }, [chapterName, chapterDescription])
 
     const handleDeleteMessage = (pid) => {
-
-        console.log('delete', pid)
         
         deleteData(pid)
         setDataMessages((prev) => {
