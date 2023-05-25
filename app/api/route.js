@@ -39,10 +39,19 @@ export async function POST(req) {
          * We will delete about 1/3 of the entries.
          * This is just a very simple and crude way to ensure that we do not hit the maximum.
          */
-        let cutoff = parseInt(prev_data.length / 3)
+
+        /**
+         * This simple scheme will not work in the long run as the remaining 2/3
+         * of the cutoff data can exceed the token count.
+         * So I need to change this.
+         */
+
+        let cutoff = prev_data.length > 40 ? Math.ceil(prev_data.length - 20) : parseInt(prev_data.length / 3)
         cutoff = isEven(cutoff) ? cutoff : cutoff + 1
 
         prev_data = previous.slice(cutoff)
+
+        const tmp_data_length = (JSON.stringify(prev_data)).length / 4
 
     }
 
@@ -56,6 +65,7 @@ export async function POST(req) {
     let reply = null
     let errorFlag = false
 
+    
     try {
 
         const completion = await openai.createChatCompletion({
@@ -83,6 +93,10 @@ export async function POST(req) {
         })
 
     }
+    
+
+    // test
+    // reply = {role: 'assistant', content: 'Lorem ipsum dolor amet sidecus orange chocolate.' }
 
     /**
      * reply format: {role: 'assistant', content: 'Hello, world! ' }
