@@ -1,18 +1,12 @@
 import { Configuration, OpenAIApi } from "openai"
 
-import { isEven } from "../../lib/utils"
+import { trim_array } from "../../lib/utils"
 
 const configuration = new Configuration({
     apiKey: process.env.OPENAI_APIKEY,
 })
 
 const openai = new OpenAIApi(configuration)
-
-/**
- * API has 4096 max tokens but we are going to set out limit
- * to much lower. You can change this if you want.
- */
-const MAX_TOKENS = 3072 // 1024 x 3
 
 export async function POST(req) {
 
@@ -26,35 +20,8 @@ export async function POST(req) {
 
     let messages = [ system ]
 
-    let prev_data = previous
+    let prev_data = trim_array(previous, 15) // just maintain last 15 entries as history
     
-    let total_token_count = (JSON.stringify(messages)).length / 4
-    if(prev_data.length > 0) total_token_count += (JSON.stringify(prev_data)).length / 4
-    total_token_count += (JSON.stringify(prompt)).length / 4
-
-    if(total_token_count > MAX_TOKENS) {
-
-        /**
-         * We will delete old entries from previous data.
-         * We will delete about 1/3 of the entries.
-         * This is just a very simple and crude way to ensure that we do not hit the maximum.
-         */
-
-        /**
-         * This simple scheme will not work in the long run as the remaining 2/3
-         * of the cutoff data can exceed the token count.
-         * So I need to change this.
-         */
-
-        let cutoff = prev_data.length > 40 ? Math.ceil(prev_data.length - 20) : parseInt(prev_data.length / 3)
-        cutoff = isEven(cutoff) ? cutoff : cutoff + 1
-
-        prev_data = previous.slice(cutoff)
-
-        const tmp_data_length = (JSON.stringify(prev_data)).length / 4
-
-    }
-
     if(prev_data.length > 0) {
 
         messages = messages.concat(prev_data)
@@ -64,7 +31,6 @@ export async function POST(req) {
     
     let reply = null
     let errorFlag = false
-
     
     try {
 
@@ -94,14 +60,8 @@ export async function POST(req) {
 
     }
     
-
-    // test
     // reply = {role: 'assistant', content: 'Lorem ipsum dolor amet sidecus orange chocolate.' }
 
-    /**
-     * reply format: {role: 'assistant', content: 'Hello, world! ' }
-     */
-    
     return new Response(JSON.stringify({ reply }), {
         status: 200,
     })

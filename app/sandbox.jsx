@@ -11,7 +11,7 @@ import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import Typography from '@mui/material/Typography'
 import Fab from '@mui/material/Fab'
-import Tooltip from '@mui/material/Tooltip'
+//import Tooltip from '@mui/material/Tooltip'
 
 import StoriesIcon from '@mui/icons-material/AutoStories';
 import SettingsIcon from '@mui/icons-material/Settings'
@@ -198,10 +198,11 @@ export default function SandBox() {
         e.preventDefault()
         e.stopPropagation()
         
-        submitPrompt(0)
+        submitPrompt()
+
     }
 
-    const submitPrompt = (mode = 0) => {
+    const submitPrompt = () => {
 
         const chapter = getChapter(chapterId)
         const character = getCharacter(characterId)
@@ -222,6 +223,9 @@ export default function SandBox() {
         } else {
             system_content += '\nAs the user, I have the following attributes:\n' + chapter_user_prompt
         }
+
+        // Limit reply
+        system_content += '\n\nMost of the time your responses should be a sentence or two.'
 
         let system_prompt = { role: 'system', content: system_content }
         
@@ -497,6 +501,7 @@ export default function SandBox() {
 
     }
 
+    /*
     const handleKeyDown = (e) => {
         if(e.code === 'Enter') {
             e.preventDefault()
@@ -506,6 +511,7 @@ export default function SandBox() {
 
         }
     }
+    */
 
     const SelectedChapter = React.useCallback(() => {
         return chapterDescription.length > 0 ? <span className={classes.text}><strong>{ chapterName }</strong> - { chapterDescription }</span> : <span className={classes.text}><strong>{ chapterName }</strong></span>
@@ -750,8 +756,8 @@ export default function SandBox() {
                         <Box component="form" onSubmit={handleSubmit} noValidate>
                             <TextField 
                             fullWidth
-                            multiline
-                            maxRows={6}
+                            //multiline
+                            //maxRows={6}
                             inputRef={inputRef}
                             value={inputText}
                             placeholder='Write message...'
