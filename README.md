@@ -173,6 +173,15 @@ I just do a simple deletion of 1/3 of the oldest entries as a way to prevent hit
 
 At this moment, there is no prompt or token optimizations yet.
 
+# Limiting Response Length
+
+Most of the time, the response from Chat Completions API is just too long to appear as natural in a conversation.
+To limit the response length, we just need to add instruction in the system prompt.
+
+```javascript
+system_content += '\n\nMost of the time your responses should be a sentence or two.'
+```
+
 
 # Installation
 
